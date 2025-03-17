@@ -20,6 +20,7 @@ Mar, 2025: initial commit.
 - cuda==12.4 # depends on the CUDA version of your machine
 - Python==3.12.7
 ```
+See also environment.yml
 
 ## Traning and & Inference
 Training
