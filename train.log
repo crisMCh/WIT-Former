@@ -1,0 +1,390 @@
+[2025-02-02 18:28:53,220][trainer.py][line:23][INFO] DataParallel(
+  (module): LITFormer(
+    (firstconv): SingleConv(
+      (conv): LITFormerBlock(
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+        (conv_1x3x3): Conv3d(1, 32, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+        (conv_3x1x1): Conv3d(1, 32, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+        (shortcut): Conv3d(1, 32, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+      )
+      (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+    )
+    (enc1): DoubleConv(
+      (double_conv): Sequential(
+        (0): LITFormerBlock(
+          (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+          (attention_s): eMSM_I(
+            (qkv): Conv2d(32, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (qkv_dwconv): Conv2d(96, 96, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=96, bias=False)
+            (project_out): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          )
+          (conv_1x3x3): Conv3d(32, 32, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+          (attention_t): eMSM_T(
+            (to_q): Linear(in_features=32, out_features=32, bias=False)
+            (to_k): Linear(in_features=32, out_features=32, bias=False)
+            (to_v): Linear(in_features=32, out_features=32, bias=False)
+            (position_embedding): PositionalEncoding(
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (project_out): Sequential(
+              (0): Linear(in_features=32, out_features=32, bias=True)
+              (1): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (conv_3x1x1): Conv3d(32, 32, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+        )
+        (1): LeakyReLU(negative_slope=0.01, inplace=True)
+        (2): LITFormerBlock(
+          (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+          (conv_1x3x3): Conv3d(32, 64, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+          (conv_3x1x1): Conv3d(32, 64, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+          (shortcut): Conv3d(32, 64, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        )
+        (3): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+    (enc2): Down(
+      (encoder): Sequential(
+        (0): MaxPool3d(kernel_size=(1, 2, 2), stride=(1, 2, 2), padding=0, dilation=1, ceil_mode=False)
+        (1): DoubleConv(
+          (double_conv): Sequential(
+            (0): LITFormerBlock(
+              (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+              (attention_s): eMSM_I(
+                (qkv): Conv2d(64, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (qkv_dwconv): Conv2d(192, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=192, bias=False)
+                (project_out): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              )
+              (conv_1x3x3): Conv3d(64, 64, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+              (attention_t): eMSM_T(
+                (to_q): Linear(in_features=64, out_features=64, bias=False)
+                (to_k): Linear(in_features=64, out_features=64, bias=False)
+                (to_v): Linear(in_features=64, out_features=64, bias=False)
+                (position_embedding): PositionalEncoding(
+                  (dropout): Dropout(p=0.1, inplace=False)
+                )
+                (project_out): Sequential(
+                  (0): Linear(in_features=64, out_features=64, bias=True)
+                  (1): Dropout(p=0.0, inplace=False)
+                )
+              )
+              (conv_3x1x1): Conv3d(64, 64, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+            )
+            (1): LeakyReLU(negative_slope=0.01, inplace=True)
+            (2): LITFormerBlock(
+              (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+              (conv_1x3x3): Conv3d(64, 128, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+              (conv_3x1x1): Conv3d(64, 128, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+              (shortcut): Conv3d(64, 128, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+            )
+            (3): LeakyReLU(negative_slope=0.01, inplace=True)
+          )
+        )
+      )
+    )
+    (enc3): Down(
+      (encoder): Sequential(
+        (0): MaxPool3d(kernel_size=(1, 2, 2), stride=(1, 2, 2), padding=0, dilation=1, ceil_mode=False)
+        (1): DoubleConv(
+          (double_conv): Sequential(
+            (0): LITFormerBlock(
+              (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+              (attention_s): eMSM_I(
+                (qkv): Conv2d(128, 384, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (qkv_dwconv): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=384, bias=False)
+                (project_out): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              )
+              (conv_1x3x3): Conv3d(128, 128, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+              (attention_t): eMSM_T(
+                (to_q): Linear(in_features=128, out_features=128, bias=False)
+                (to_k): Linear(in_features=128, out_features=128, bias=False)
+                (to_v): Linear(in_features=128, out_features=128, bias=False)
+                (position_embedding): PositionalEncoding(
+                  (dropout): Dropout(p=0.1, inplace=False)
+                )
+                (project_out): Sequential(
+                  (0): Linear(in_features=128, out_features=128, bias=True)
+                  (1): Dropout(p=0.0, inplace=False)
+                )
+              )
+              (conv_3x1x1): Conv3d(128, 128, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+            )
+            (1): LeakyReLU(negative_slope=0.01, inplace=True)
+            (2): LITFormerBlock(
+              (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+              (conv_1x3x3): Conv3d(128, 256, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+              (conv_3x1x1): Conv3d(128, 256, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+              (shortcut): Conv3d(128, 256, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+            )
+            (3): LeakyReLU(negative_slope=0.01, inplace=True)
+          )
+        )
+      )
+    )
+    (enc4): LastDown(
+      (encoder): Sequential(
+        (0): MaxPool3d(kernel_size=(1, 2, 2), stride=(1, 2, 2), padding=0, dilation=1, ceil_mode=False)
+        (1): LITFormerBlock(
+          (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+          (attention_s): eMSM_I(
+            (qkv): Conv2d(256, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (qkv_dwconv): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=768, bias=False)
+            (project_out): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          )
+          (conv_1x3x3): Conv3d(256, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+          (attention_t): eMSM_T(
+            (to_q): Linear(in_features=256, out_features=256, bias=False)
+            (to_k): Linear(in_features=256, out_features=256, bias=False)
+            (to_v): Linear(in_features=256, out_features=256, bias=False)
+            (position_embedding): PositionalEncoding(
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (project_out): Sequential(
+              (0): Linear(in_features=256, out_features=256, bias=True)
+              (1): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (conv_3x1x1): Conv3d(256, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+          (shortcut): Conv3d(256, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        )
+        (2): LeakyReLU(negative_slope=0.01, inplace=True)
+        (3): LITFormerBlock(
+          (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+          (conv_1x3x3): Conv3d(512, 256, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+          (conv_3x1x1): Conv3d(512, 256, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+          (shortcut): Conv3d(512, 256, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        )
+        (4): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+    (dec1): Up(
+      (up): Upsample(scale_factor=(1.0, 2.0, 2.0), mode='trilinear')
+      (conv): DoubleConv(
+        (double_conv): Sequential(
+          (0): LITFormerBlock(
+            (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+            (attention_s): eMSM_I(
+              (qkv): Conv2d(256, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (qkv_dwconv): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=768, bias=False)
+              (project_out): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            )
+            (conv_1x3x3): Conv3d(256, 256, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+            (attention_t): eMSM_T(
+              (to_q): Linear(in_features=256, out_features=256, bias=False)
+              (to_k): Linear(in_features=256, out_features=256, bias=False)
+              (to_v): Linear(in_features=256, out_features=256, bias=False)
+              (position_embedding): PositionalEncoding(
+                (dropout): Dropout(p=0.1, inplace=False)
+              )
+              (project_out): Sequential(
+                (0): Linear(in_features=256, out_features=256, bias=True)
+                (1): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (conv_3x1x1): Conv3d(256, 256, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+          )
+          (1): LeakyReLU(negative_slope=0.01, inplace=True)
+          (2): LITFormerBlock(
+            (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+            (conv_1x3x3): Conv3d(256, 128, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+            (conv_3x1x1): Conv3d(256, 128, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+            (shortcut): Conv3d(256, 128, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+          )
+          (3): LeakyReLU(negative_slope=0.01, inplace=True)
+        )
+      )
+    )
+    (dec2): Up(
+      (up): Upsample(scale_factor=(1.0, 2.0, 2.0), mode='trilinear')
+      (conv): DoubleConv(
+        (double_conv): Sequential(
+          (0): LITFormerBlock(
+            (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+            (attention_s): eMSM_I(
+              (qkv): Conv2d(128, 384, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (qkv_dwconv): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=384, bias=False)
+              (project_out): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            )
+            (conv_1x3x3): Conv3d(128, 128, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+            (attention_t): eMSM_T(
+              (to_q): Linear(in_features=128, out_features=128, bias=False)
+              (to_k): Linear(in_features=128, out_features=128, bias=False)
+              (to_v): Linear(in_features=128, out_features=128, bias=False)
+              (position_embedding): PositionalEncoding(
+                (dropout): Dropout(p=0.1, inplace=False)
+              )
+              (project_out): Sequential(
+                (0): Linear(in_features=128, out_features=128, bias=True)
+                (1): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (conv_3x1x1): Conv3d(128, 128, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+          )
+          (1): LeakyReLU(negative_slope=0.01, inplace=True)
+          (2): LITFormerBlock(
+            (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+            (conv_1x3x3): Conv3d(128, 64, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+            (conv_3x1x1): Conv3d(128, 64, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+            (shortcut): Conv3d(128, 64, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+          )
+          (3): LeakyReLU(negative_slope=0.01, inplace=True)
+        )
+      )
+    )
+    (dec3): Up(
+      (up): Upsample(scale_factor=(1.0, 2.0, 2.0), mode='trilinear')
+      (conv): DoubleConv(
+        (double_conv): Sequential(
+          (0): LITFormerBlock(
+            (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+            (attention_s): eMSM_I(
+              (qkv): Conv2d(64, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (qkv_dwconv): Conv2d(192, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=192, bias=False)
+              (project_out): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            )
+            (conv_1x3x3): Conv3d(64, 64, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+            (attention_t): eMSM_T(
+              (to_q): Linear(in_features=64, out_features=64, bias=False)
+              (to_k): Linear(in_features=64, out_features=64, bias=False)
+              (to_v): Linear(in_features=64, out_features=64, bias=False)
+              (position_embedding): PositionalEncoding(
+                (dropout): Dropout(p=0.1, inplace=False)
+              )
+              (project_out): Sequential(
+                (0): Linear(in_features=64, out_features=64, bias=True)
+                (1): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (conv_3x1x1): Conv3d(64, 64, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+          )
+          (1): LeakyReLU(negative_slope=0.01, inplace=True)
+          (2): LITFormerBlock(
+            (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+            (conv_1x3x3): Conv3d(64, 32, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+            (conv_3x1x1): Conv3d(64, 32, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+            (shortcut): Conv3d(64, 32, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+          )
+          (3): LeakyReLU(negative_slope=0.01, inplace=True)
+        )
+      )
+    )
+    (out1): SingleConv(
+      (conv): LITFormerBlock(
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+        (conv_1x3x3): Conv3d(32, 32, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+        (conv_3x1x1): Conv3d(32, 32, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+      )
+      (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+    )
+    (depth_up): Upsample(scale_factor=(2.5, 1.0, 1.0), mode='trilinear')
+    (out2): SingleConv(
+      (conv): LITFormerBlock(
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+        (conv_1x3x3): Conv3d(32, 1, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+        (conv_3x1x1): Conv3d(32, 1, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+        (shortcut): Conv3d(32, 1, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+      )
+      (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+    )
+  )
+)
+[2025-02-02 18:28:53,225][trainer.py][line:24][INFO] start training!
+[2025-02-02 18:29:51,918][trainer.py][line:135][INFO] val:Epoch: [0/50],epoch_loss: 2.651687, val_psnr3d: 1.6007, val_ssim3d: 0.5324,val_ssim2d: 0.0630,test_rmse: 0.851367
+[2025-02-02 18:30:50,130][trainer.py][line:135][INFO] val:Epoch: [1/50],epoch_loss: 2.651687, val_psnr3d: 1.6007, val_ssim3d: 0.5324,val_ssim2d: 0.0630,test_rmse: 0.851367
+[2025-02-02 18:45:21,589][trainer.py][line:89][INFO] Epoch: [2/50],epoch_loss: 0.816414, train_psnr3d: 21.6981,train_ssim3d: 0.6941,train_ssim2d:0.6395
+[2025-02-02 18:46:21,082][trainer.py][line:135][INFO] val:Epoch: [2/50],epoch_loss: 0.538419, val_psnr3d: 23.5162, val_ssim3d: 0.8111,val_ssim2d: 0.7616,test_rmse: 0.068454
+[2025-02-02 19:00:41,149][trainer.py][line:89][INFO] Epoch: [3/50],epoch_loss: 0.523723, train_psnr3d: 27.3498,train_ssim3d: 0.8226,train_ssim2d:0.7570
+[2025-02-02 19:01:40,202][trainer.py][line:135][INFO] val:Epoch: [3/50],epoch_loss: 0.390171, val_psnr3d: 30.0285, val_ssim3d: 0.8875,val_ssim2d: 0.8171,test_rmse: 0.032311
+[2025-02-02 19:15:56,449][trainer.py][line:89][INFO] Epoch: [4/50],epoch_loss: 0.362828, train_psnr3d: 30.8643,train_ssim3d: 0.9053,train_ssim2d:0.8300
+[2025-02-02 19:16:55,416][trainer.py][line:135][INFO] val:Epoch: [4/50],epoch_loss: 0.307745, val_psnr3d: 32.4966, val_ssim3d: 0.9183,val_ssim2d: 0.8555,test_rmse: 0.024445
+[2025-02-02 19:31:17,701][trainer.py][line:89][INFO] Epoch: [5/50],epoch_loss: 0.254288, train_psnr3d: 33.0460,train_ssim3d: 0.9540,train_ssim2d:0.8812
+[2025-02-02 19:32:21,819][trainer.py][line:135][INFO] val:Epoch: [5/50],epoch_loss: 0.240897, val_psnr3d: 35.3756, val_ssim3d: 0.9578,val_ssim2d: 0.8857,test_rmse: 0.017510
+[2025-02-02 19:47:31,529][trainer.py][line:89][INFO] Epoch: [6/50],epoch_loss: 0.203522, train_psnr3d: 34.3576,train_ssim3d: 0.9709,train_ssim2d:0.9052
+[2025-02-02 19:48:30,774][trainer.py][line:135][INFO] val:Epoch: [6/50],epoch_loss: 0.169722, val_psnr3d: 36.1181, val_ssim3d: 0.9777,val_ssim2d: 0.9207,test_rmse: 0.016067
+[2025-02-02 20:02:50,752][trainer.py][line:89][INFO] Epoch: [7/50],epoch_loss: 0.179404, train_psnr3d: 35.1203,train_ssim3d: 0.9773,train_ssim2d:0.9166
+[2025-02-02 20:03:55,767][trainer.py][line:135][INFO] val:Epoch: [7/50],epoch_loss: 0.155979, val_psnr3d: 34.6725, val_ssim3d: 0.9853,val_ssim2d: 0.9287,test_rmse: 0.018949
+[2025-02-02 20:19:36,606][trainer.py][line:89][INFO] Epoch: [8/50],epoch_loss: 0.175393, train_psnr3d: 35.4043,train_ssim3d: 0.9776,train_ssim2d:0.9184
+[2025-02-02 20:20:36,525][trainer.py][line:135][INFO] val:Epoch: [8/50],epoch_loss: 0.147949, val_psnr3d: 36.6175, val_ssim3d: 0.9839,val_ssim2d: 0.9312,test_rmse: 0.015206
+[2025-02-02 20:34:48,386][trainer.py][line:89][INFO] Epoch: [9/50],epoch_loss: 0.162512, train_psnr3d: 35.8027,train_ssim3d: 0.9812,train_ssim2d:0.9245
+[2025-02-02 20:35:46,868][trainer.py][line:135][INFO] val:Epoch: [9/50],epoch_loss: 0.152854, val_psnr3d: 36.5401, val_ssim3d: 0.9840,val_ssim2d: 0.9287,test_rmse: 0.015290
+[2025-02-02 20:50:03,780][trainer.py][line:89][INFO] Epoch: [10/50],epoch_loss: 0.158630, train_psnr3d: 35.9815,train_ssim3d: 0.9818,train_ssim2d:0.9264
+[2025-02-02 20:51:02,961][trainer.py][line:135][INFO] val:Epoch: [10/50],epoch_loss: 0.138966, val_psnr3d: 37.0672, val_ssim3d: 0.9870,val_ssim2d: 0.9353,test_rmse: 0.014412
+[2025-02-02 21:05:19,381][trainer.py][line:89][INFO] Epoch: [11/50],epoch_loss: 0.149319, train_psnr3d: 36.2983,train_ssim3d: 0.9842,train_ssim2d:0.9307
+[2025-02-02 21:06:18,644][trainer.py][line:135][INFO] val:Epoch: [11/50],epoch_loss: 0.147277, val_psnr3d: 36.6776, val_ssim3d: 0.9844,val_ssim2d: 0.9315,test_rmse: 0.015060
+[2025-02-02 21:20:37,004][trainer.py][line:89][INFO] Epoch: [12/50],epoch_loss: 0.146944, train_psnr3d: 36.4456,train_ssim3d: 0.9845,train_ssim2d:0.9318
+[2025-02-02 21:21:36,250][trainer.py][line:135][INFO] val:Epoch: [12/50],epoch_loss: 0.130038, val_psnr3d: 37.2321, val_ssim3d: 0.9891,val_ssim2d: 0.9396,test_rmse: 0.014136
+[2025-02-02 21:36:07,043][trainer.py][line:89][INFO] Epoch: [13/50],epoch_loss: 0.142620, train_psnr3d: 36.6825,train_ssim3d: 0.9855,train_ssim2d:0.9338
+[2025-02-02 21:37:06,499][trainer.py][line:135][INFO] val:Epoch: [13/50],epoch_loss: 0.136997, val_psnr3d: 36.7872, val_ssim3d: 0.9863,val_ssim2d: 0.9365,test_rmse: 0.014862
+[2025-02-02 21:51:21,361][trainer.py][line:89][INFO] Epoch: [14/50],epoch_loss: 0.136710, train_psnr3d: 36.9689,train_ssim3d: 0.9869,train_ssim2d:0.9365
+[2025-02-02 21:52:20,776][trainer.py][line:135][INFO] val:Epoch: [14/50],epoch_loss: 0.125912, val_psnr3d: 37.1678, val_ssim3d: 0.9898,val_ssim2d: 0.9418,test_rmse: 0.014241
+[2025-02-02 22:06:39,912][trainer.py][line:89][INFO] Epoch: [15/50],epoch_loss: 0.136164, train_psnr3d: 36.9589,train_ssim3d: 0.9868,train_ssim2d:0.9369
+[2025-02-02 22:07:40,186][trainer.py][line:135][INFO] val:Epoch: [15/50],epoch_loss: 0.123915, val_psnr3d: 37.3660, val_ssim3d: 0.9902,val_ssim2d: 0.9427,test_rmse: 0.013923
+[2025-02-02 22:22:06,490][trainer.py][line:89][INFO] Epoch: [16/50],epoch_loss: 0.133903, train_psnr3d: 37.1616,train_ssim3d: 0.9872,train_ssim2d:0.9379
+[2025-02-02 22:23:05,005][trainer.py][line:135][INFO] val:Epoch: [16/50],epoch_loss: 0.148411, val_psnr3d: 35.8707, val_ssim3d: 0.9808,val_ssim2d: 0.9319,test_rmse: 0.016609
+[2025-02-02 22:37:29,004][trainer.py][line:89][INFO] Epoch: [17/50],epoch_loss: 0.132278, train_psnr3d: 37.2452,train_ssim3d: 0.9875,train_ssim2d:0.9386
+[2025-02-02 22:38:28,737][trainer.py][line:135][INFO] val:Epoch: [17/50],epoch_loss: 0.120925, val_psnr3d: 37.6322, val_ssim3d: 0.9907,val_ssim2d: 0.9440,test_rmse: 0.013507
+[2025-02-02 22:52:38,891][trainer.py][line:89][INFO] Epoch: [18/50],epoch_loss: 0.130117, train_psnr3d: 37.3299,train_ssim3d: 0.9880,train_ssim2d:0.9396
+[2025-02-02 22:53:39,181][trainer.py][line:135][INFO] val:Epoch: [18/50],epoch_loss: 0.120678, val_psnr3d: 37.5663, val_ssim3d: 0.9906,val_ssim2d: 0.9442,test_rmse: 0.013628
+[2025-02-02 23:07:57,242][trainer.py][line:89][INFO] Epoch: [19/50],epoch_loss: 0.128093, train_psnr3d: 37.4315,train_ssim3d: 0.9884,train_ssim2d:0.9406
+[2025-02-02 23:08:56,739][trainer.py][line:135][INFO] val:Epoch: [19/50],epoch_loss: 0.119143, val_psnr3d: 37.9297, val_ssim3d: 0.9907,val_ssim2d: 0.9447,test_rmse: 0.013060
+[2025-02-02 23:23:11,868][trainer.py][line:89][INFO] Epoch: [20/50],epoch_loss: 0.125833, train_psnr3d: 37.5442,train_ssim3d: 0.9889,train_ssim2d:0.9417
+[2025-02-02 23:24:11,006][trainer.py][line:135][INFO] val:Epoch: [20/50],epoch_loss: 0.116136, val_psnr3d: 37.8110, val_ssim3d: 0.9917,val_ssim2d: 0.9463,test_rmse: 0.013243
+[2025-02-02 23:38:26,359][trainer.py][line:89][INFO] Epoch: [21/50],epoch_loss: 0.125260, train_psnr3d: 37.6332,train_ssim3d: 0.9889,train_ssim2d:0.9419
+[2025-02-02 23:39:25,202][trainer.py][line:135][INFO] val:Epoch: [21/50],epoch_loss: 0.117127, val_psnr3d: 37.9448, val_ssim3d: 0.9916,val_ssim2d: 0.9457,test_rmse: 0.013045
+[2025-02-02 23:53:42,013][trainer.py][line:89][INFO] Epoch: [22/50],epoch_loss: 0.123261, train_psnr3d: 37.7272,train_ssim3d: 0.9894,train_ssim2d:0.9428
+[2025-02-02 23:54:41,028][trainer.py][line:135][INFO] val:Epoch: [22/50],epoch_loss: 0.114899, val_psnr3d: 38.0868, val_ssim3d: 0.9916,val_ssim2d: 0.9468,test_rmse: 0.012833
+[2025-02-03 00:10:10,826][trainer.py][line:89][INFO] Epoch: [23/50],epoch_loss: 0.123012, train_psnr3d: 37.7257,train_ssim3d: 0.9894,train_ssim2d:0.9430
+[2025-02-03 00:11:10,377][trainer.py][line:135][INFO] val:Epoch: [23/50],epoch_loss: 0.115024, val_psnr3d: 37.9949, val_ssim3d: 0.9916,val_ssim2d: 0.9468,test_rmse: 0.012968
+[2025-02-03 00:25:19,604][trainer.py][line:89][INFO] Epoch: [24/50],epoch_loss: 0.120906, train_psnr3d: 37.8872,train_ssim3d: 0.9898,train_ssim2d:0.9439
+[2025-02-03 00:26:19,053][trainer.py][line:135][INFO] val:Epoch: [24/50],epoch_loss: 0.114068, val_psnr3d: 38.0617, val_ssim3d: 0.9919,val_ssim2d: 0.9473,test_rmse: 0.012875
+[2025-02-03 00:40:41,652][trainer.py][line:89][INFO] Epoch: [25/50],epoch_loss: 0.120635, train_psnr3d: 37.9196,train_ssim3d: 0.9898,train_ssim2d:0.9440
+[2025-02-03 00:41:40,949][trainer.py][line:135][INFO] val:Epoch: [25/50],epoch_loss: 0.112929, val_psnr3d: 38.2049, val_ssim3d: 0.9920,val_ssim2d: 0.9477,test_rmse: 0.012666
+[2025-02-03 00:56:04,475][trainer.py][line:89][INFO] Epoch: [26/50],epoch_loss: 0.119769, train_psnr3d: 37.9786,train_ssim3d: 0.9900,train_ssim2d:0.9444
+[2025-02-03 00:57:06,207][trainer.py][line:135][INFO] val:Epoch: [26/50],epoch_loss: 0.112081, val_psnr3d: 38.1665, val_ssim3d: 0.9922,val_ssim2d: 0.9482,test_rmse: 0.012709
+[2025-02-03 01:12:11,050][trainer.py][line:89][INFO] Epoch: [27/50],epoch_loss: 0.118965, train_psnr3d: 38.0218,train_ssim3d: 0.9901,train_ssim2d:0.9448
+[2025-02-03 01:13:10,401][trainer.py][line:135][INFO] val:Epoch: [27/50],epoch_loss: 0.113579, val_psnr3d: 37.9945, val_ssim3d: 0.9917,val_ssim2d: 0.9475,test_rmse: 0.012968
+[2025-02-03 01:27:29,748][trainer.py][line:89][INFO] Epoch: [28/50],epoch_loss: 0.117475, train_psnr3d: 38.1378,train_ssim3d: 0.9905,train_ssim2d:0.9455
+[2025-02-03 01:28:28,957][trainer.py][line:135][INFO] val:Epoch: [28/50],epoch_loss: 0.111707, val_psnr3d: 38.1558, val_ssim3d: 0.9923,val_ssim2d: 0.9484,test_rmse: 0.012726
+[2025-02-03 01:42:34,056][trainer.py][line:89][INFO] Epoch: [29/50],epoch_loss: 0.117412, train_psnr3d: 38.1479,train_ssim3d: 0.9904,train_ssim2d:0.9455
+[2025-02-03 01:43:33,361][trainer.py][line:135][INFO] val:Epoch: [29/50],epoch_loss: 0.110896, val_psnr3d: 38.2233, val_ssim3d: 0.9923,val_ssim2d: 0.9487,test_rmse: 0.012630
+[2025-02-03 01:57:48,796][trainer.py][line:89][INFO] Epoch: [30/50],epoch_loss: 0.117084, train_psnr3d: 38.1792,train_ssim3d: 0.9905,train_ssim2d:0.9457
+[2025-02-03 01:58:48,924][trainer.py][line:135][INFO] val:Epoch: [30/50],epoch_loss: 0.111546, val_psnr3d: 38.2324, val_ssim3d: 0.9921,val_ssim2d: 0.9485,test_rmse: 0.012623
+[2025-02-03 02:13:05,999][trainer.py][line:89][INFO] Epoch: [31/50],epoch_loss: 0.115913, train_psnr3d: 38.2631,train_ssim3d: 0.9907,train_ssim2d:0.9462
+[2025-02-03 02:14:04,886][trainer.py][line:135][INFO] val:Epoch: [31/50],epoch_loss: 0.110954, val_psnr3d: 38.2852, val_ssim3d: 0.9923,val_ssim2d: 0.9487,test_rmse: 0.012549
+[2025-02-03 02:28:18,859][trainer.py][line:89][INFO] Epoch: [32/50],epoch_loss: 0.115303, train_psnr3d: 38.3128,train_ssim3d: 0.9908,train_ssim2d:0.9465
+[2025-02-03 02:29:17,554][trainer.py][line:135][INFO] val:Epoch: [32/50],epoch_loss: 0.111033, val_psnr3d: 38.2695, val_ssim3d: 0.9922,val_ssim2d: 0.9487,test_rmse: 0.012563
+[2025-02-03 02:43:48,968][trainer.py][line:89][INFO] Epoch: [33/50],epoch_loss: 0.115078, train_psnr3d: 38.3420,train_ssim3d: 0.9909,train_ssim2d:0.9466
+[2025-02-03 02:44:47,746][trainer.py][line:135][INFO] val:Epoch: [33/50],epoch_loss: 0.109176, val_psnr3d: 38.4633, val_ssim3d: 0.9926,val_ssim2d: 0.9495,test_rmse: 0.012294
+[2025-02-03 02:59:04,459][trainer.py][line:89][INFO] Epoch: [34/50],epoch_loss: 0.114631, train_psnr3d: 38.3833,train_ssim3d: 0.9909,train_ssim2d:0.9467
+[2025-02-03 03:00:04,034][trainer.py][line:135][INFO] val:Epoch: [34/50],epoch_loss: 0.108873, val_psnr3d: 38.3644, val_ssim3d: 0.9927,val_ssim2d: 0.9496,test_rmse: 0.012430
+[2025-02-03 03:14:20,105][trainer.py][line:89][INFO] Epoch: [35/50],epoch_loss: 0.114257, train_psnr3d: 38.4012,train_ssim3d: 0.9910,train_ssim2d:0.9469
+[2025-02-03 03:15:20,216][trainer.py][line:135][INFO] val:Epoch: [35/50],epoch_loss: 0.108881, val_psnr3d: 38.4790, val_ssim3d: 0.9925,val_ssim2d: 0.9496,test_rmse: 0.012272
+[2025-02-03 03:29:44,180][trainer.py][line:89][INFO] Epoch: [36/50],epoch_loss: 0.113620, train_psnr3d: 38.4545,train_ssim3d: 0.9911,train_ssim2d:0.9472
+[2025-02-03 03:30:44,217][trainer.py][line:135][INFO] val:Epoch: [36/50],epoch_loss: 0.109392, val_psnr3d: 38.4462, val_ssim3d: 0.9925,val_ssim2d: 0.9494,test_rmse: 0.012317
+[2025-02-03 03:45:01,734][trainer.py][line:89][INFO] Epoch: [37/50],epoch_loss: 0.113339, train_psnr3d: 38.4692,train_ssim3d: 0.9912,train_ssim2d:0.9473
+[2025-02-03 03:46:01,014][trainer.py][line:135][INFO] val:Epoch: [37/50],epoch_loss: 0.109577, val_psnr3d: 38.4155, val_ssim3d: 0.9924,val_ssim2d: 0.9493,test_rmse: 0.012358
+[2025-02-03 04:00:15,590][trainer.py][line:89][INFO] Epoch: [38/50],epoch_loss: 0.113119, train_psnr3d: 38.4721,train_ssim3d: 0.9912,train_ssim2d:0.9474
+[2025-02-03 04:01:15,922][trainer.py][line:135][INFO] val:Epoch: [38/50],epoch_loss: 0.107806, val_psnr3d: 38.5517, val_ssim3d: 0.9928,val_ssim2d: 0.9501,test_rmse: 0.012169
+[2025-02-03 04:15:31,770][trainer.py][line:89][INFO] Epoch: [39/50],epoch_loss: 0.112784, train_psnr3d: 38.5229,train_ssim3d: 0.9913,train_ssim2d:0.9476
+[2025-02-03 04:16:31,614][trainer.py][line:135][INFO] val:Epoch: [39/50],epoch_loss: 0.107553, val_psnr3d: 38.5332, val_ssim3d: 0.9929,val_ssim2d: 0.9502,test_rmse: 0.012197
+[2025-02-03 04:30:52,791][trainer.py][line:89][INFO] Epoch: [40/50],epoch_loss: 0.112626, train_psnr3d: 38.5263,train_ssim3d: 0.9913,train_ssim2d:0.9477
+[2025-02-03 04:31:52,572][trainer.py][line:135][INFO] val:Epoch: [40/50],epoch_loss: 0.107109, val_psnr3d: 38.5932, val_ssim3d: 0.9929,val_ssim2d: 0.9504,test_rmse: 0.012112
+[2025-02-03 04:46:12,150][trainer.py][line:89][INFO] Epoch: [41/50],epoch_loss: 0.112303, train_psnr3d: 38.5517,train_ssim3d: 0.9914,train_ssim2d:0.9478
+[2025-02-03 04:47:11,179][trainer.py][line:135][INFO] val:Epoch: [41/50],epoch_loss: 0.107261, val_psnr3d: 38.5774, val_ssim3d: 0.9929,val_ssim2d: 0.9503,test_rmse: 0.012133
+[2025-02-03 05:01:23,656][trainer.py][line:89][INFO] Epoch: [42/50],epoch_loss: 0.112160, train_psnr3d: 38.5550,train_ssim3d: 0.9914,train_ssim2d:0.9479
+[2025-02-03 05:02:22,656][trainer.py][line:135][INFO] val:Epoch: [42/50],epoch_loss: 0.107281, val_psnr3d: 38.5253, val_ssim3d: 0.9928,val_ssim2d: 0.9504,test_rmse: 0.012205
+[2025-02-03 05:16:31,959][trainer.py][line:89][INFO] Epoch: [43/50],epoch_loss: 0.112036, train_psnr3d: 38.5637,train_ssim3d: 0.9914,train_ssim2d:0.9479
+[2025-02-03 05:17:30,474][trainer.py][line:135][INFO] val:Epoch: [43/50],epoch_loss: 0.106946, val_psnr3d: 38.5928, val_ssim3d: 0.9930,val_ssim2d: 0.9505,test_rmse: 0.012112
+[2025-02-03 05:31:53,823][trainer.py][line:89][INFO] Epoch: [44/50],epoch_loss: 0.111837, train_psnr3d: 38.5800,train_ssim3d: 0.9914,train_ssim2d:0.9480
+[2025-02-03 05:32:57,039][trainer.py][line:135][INFO] val:Epoch: [44/50],epoch_loss: 0.107956, val_psnr3d: 38.5839, val_ssim3d: 0.9927,val_ssim2d: 0.9500,test_rmse: 0.012125
+[2025-02-03 05:48:02,158][trainer.py][line:89][INFO] Epoch: [45/50],epoch_loss: 0.111785, train_psnr3d: 38.5639,train_ssim3d: 0.9914,train_ssim2d:0.9481
+[2025-02-03 05:49:01,531][trainer.py][line:135][INFO] val:Epoch: [45/50],epoch_loss: 0.106909, val_psnr3d: 38.6027, val_ssim3d: 0.9929,val_ssim2d: 0.9505,test_rmse: 0.012100
+[2025-02-03 06:03:20,104][trainer.py][line:89][INFO] Epoch: [46/50],epoch_loss: 0.111714, train_psnr3d: 38.5998,train_ssim3d: 0.9915,train_ssim2d:0.9481
+[2025-02-03 06:04:19,514][trainer.py][line:135][INFO] val:Epoch: [46/50],epoch_loss: 0.106666, val_psnr3d: 38.6109, val_ssim3d: 0.9930,val_ssim2d: 0.9506,test_rmse: 0.012087
+[2025-02-03 06:18:36,316][trainer.py][line:89][INFO] Epoch: [47/50],epoch_loss: 0.111622, train_psnr3d: 38.6020,train_ssim3d: 0.9915,train_ssim2d:0.9481
+[2025-02-03 06:19:35,350][trainer.py][line:135][INFO] val:Epoch: [47/50],epoch_loss: 0.106652, val_psnr3d: 38.6060, val_ssim3d: 0.9930,val_ssim2d: 0.9506,test_rmse: 0.012094
+[2025-02-03 06:33:42,725][trainer.py][line:89][INFO] Epoch: [48/50],epoch_loss: 0.111587, train_psnr3d: 38.6070,train_ssim3d: 0.9915,train_ssim2d:0.9481
+[2025-02-03 06:34:42,171][trainer.py][line:135][INFO] val:Epoch: [48/50],epoch_loss: 0.106644, val_psnr3d: 38.6111, val_ssim3d: 0.9930,val_ssim2d: 0.9506,test_rmse: 0.012087
+[2025-02-03 06:48:58,893][trainer.py][line:89][INFO] Epoch: [49/50],epoch_loss: 0.111549, train_psnr3d: 38.6038,train_ssim3d: 0.9915,train_ssim2d:0.9482
+[2025-02-03 06:49:58,483][trainer.py][line:135][INFO] val:Epoch: [49/50],epoch_loss: 0.106682, val_psnr3d: 38.6211, val_ssim3d: 0.9930,val_ssim2d: 0.9506,test_rmse: 0.012073
+[2025-02-03 06:49:58,484][trainer.py][line:155][INFO] finish training!
